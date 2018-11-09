@@ -3,18 +3,21 @@ using ManagedBass;
 using Pitch;
 using System;
 using System.Runtime.InteropServices;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class PitchDetector : MonoBehaviour
 {
-    [SerializeField] private GUIStyle _gui;
+    [SerializeField] private Image _pitchFill;
+
     private PitchTracker _pitchTracker;
-    private AudioClip _clip;
     private int _stream;
     private float[] _buffer;
-    private float _pitch;
-    private float _startTime;
-    private bool _loggedTheLag = false;
-    private float _lastPitch;
+    private float _lastRealPitch;
+    private List<float> _pitchesThisUpdate = new List<float>();
+
+    private const float MIN_FREQ = 100f;
+    private const float MAX_FREQ = 1000f;
 
     private const int SAMPLE_RATE = 44100;
 
@@ -26,13 +29,41 @@ public class PitchDetector : MonoBehaviour
         Bass.RecordInit();
         _stream = Bass.RecordStart(SAMPLE_RATE, 1, BassFlags.Float | BassFlags.RecordPause, HandleRecordingData);
         Bass.ChannelPlay(_stream);
-        _startTime = Time.realtimeSinceStartup;
+    }
+
+    private void Update()
+    {
+        var pitch = AverageOfNonZeroPitches();
+        if (pitch > 0)
+        {
+            _pitchFill.fillAmount = (pitch - MIN_FREQ) / (MAX_FREQ - MIN_FREQ);
+        }
+        _pitchesThisUpdate.Clear();
+    }
+
+    // TODO: Average over time
+    private float AverageOfNonZeroPitches()
+    {
+        var sum = 0f;
+        int validPitches = 0;
+        for (int i = 0; i < _pitchesThisUpdate.Count; i++)
+        {
+            if(_pitchesThisUpdate[i] > 1)
+            {
+                sum += _pitchesThisUpdate[i];
+                validPitches++;
+            }
+        }
+        if(validPitches >= _pitchesThisUpdate.Count * 1f/3f)
+        {
+            return sum / validPitches;
+        }
+        return 0;
     }
 
     private void HandleNewPitchDetected(Pitch.PitchTracker sender, PitchTracker.PitchRecord pitchRecord)
     {
-        _lastPitch = _pitch;
-        _pitch = pitchRecord.Pitch;
+        _pitchesThisUpdate.Add(pitchRecord.Pitch);
     }
 
     private bool HandleRecordingData(int Handle, IntPtr Buffer, int Length, IntPtr User)
@@ -46,11 +77,6 @@ public class PitchDetector : MonoBehaviour
 
         _pitchTracker.ProcessBuffer(_buffer);
         return true;
-    }
-
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(0, 0, 1000, 200), _pitch.ToString());
     }
 
     private void OnDestroy()
