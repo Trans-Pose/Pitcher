@@ -2,7 +2,7 @@
 </Cabbage>
 <CsoundSynthesizer>
 <CsOptions>
--n -d -+rtmidi=NULL -M0 -m0d
+-n -+rtmidi=NULL -M0 -m0d
 </CsOptions>
 <CsInstruments>
 ; Initialize the global variables. 
@@ -32,7 +32,7 @@ puts String, kp
 ;String sprintfk "frequency in oct : %f \n", koct
 ;puts String, koct
 
-;outs a1, a2
+outs a1, a2
 endin
 
 </CsInstruments>
