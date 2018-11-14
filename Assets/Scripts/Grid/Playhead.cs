@@ -3,26 +3,15 @@
 
 public class Playhead : MonoBehaviour
 {
-    [SerializeField] private Grid _grid;
-    [SerializeField] private int _rows = 8;
-    [SerializeField] private int _columns = 8;
-    [SerializeField] private float _bpm = 120f;
+    [SerializeField] private LevelConfig _level;
     private Vector3 _start, _end;
     private float _timer, _loopDuration;
 
-#if UNITY_EDITOR
-    private void OnValidate()
-    {
-        var columnsPerSecond = _bpm / 60f;
-        _loopDuration = _columns / columnsPerSecond;
-    }
-#endif
-
     private void Awake()
 	{
-        var columnsPerSecond = _bpm / 60f;
-        _loopDuration = _columns / columnsPerSecond;
-        var gridWidth = _grid.cellSize.x * _columns;
+        var columnsPerSecond = _level.BPM / 60f;
+        _loopDuration = _level.Columns / columnsPerSecond;
+        var gridWidth = _level.Grid.cellSize.x * _level.Columns;
         _start = new Vector3(-gridWidth * 0.5f, 0f);
         _end = new Vector3(gridWidth * 0.5f, 0f);
         transform.position = _start;
