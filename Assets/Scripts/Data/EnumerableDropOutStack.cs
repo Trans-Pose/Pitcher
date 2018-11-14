@@ -9,7 +9,7 @@ namespace EnumerableDropOutStack
     /// </summary>
     /// <typeparam name="T">Some Generic Class</typeparam>
     [Serializable]
-    public class EnumerableDropOutStack<T> : IEnumerable<T>
+    public class DropOutStack<T> : IEnumerable<T>
     {
 
         /// <summary>
@@ -26,15 +26,15 @@ namespace EnumerableDropOutStack
         private int _count; // The amount of items in the array.
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EnumerableDropOutStack{T}"/> class.
+        /// Initializes a new instance of the <see cref="DropOutStack{T}"/> class.
         /// </summary>
         /// <param name="capacity">The capacity of the stack.</param>
-        public EnumerableDropOutStack(int capacity)
+        public DropOutStack(int capacity)
         {
             _items = new T[capacity];
         }
 
-        public EnumerableDropOutStack(EnumerableDropOutStack<T> toClone)
+        public DropOutStack(DropOutStack<T> toClone)
         {
             var len = toClone._items.Length;
             _items = new T[len];

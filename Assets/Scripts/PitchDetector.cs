@@ -15,8 +15,8 @@ public class PitchDetector : MonoBehaviour
     private int _streamId;
     private float[] _buffer;
     private List<float> _pitchesThisUpdate = new List<float>();
-    private EnumerableDropOutStack<float> _detectedPitches = new EnumerableDropOutStack<float>(10);
-    public EnumerableDropOutStack<float> DetectedPitches { get { return new EnumerableDropOutStack<float>(_detectedPitches); } }
+    private DropOutStack<float> _detectedPitches = new DropOutStack<float>(10);
+    public DropOutStack<float> DetectedPitches { get { return new DropOutStack<float>(_detectedPitches); } }
     private bool _isRecording;
 
     private void Awake()
