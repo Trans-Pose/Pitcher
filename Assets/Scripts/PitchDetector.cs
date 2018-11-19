@@ -5,7 +5,6 @@ using System;
 using System.Runtime.InteropServices;
 using EnumerableDropOutStack;
 using System.Collections.Generic;
-using System.Linq;
 
 public class PitchDetector : MonoBehaviour
 {
