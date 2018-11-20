@@ -2,16 +2,28 @@
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
 
-[Game, Unique]
-public class BeatsPerSecondComponent : IComponent
+[Game]
+public class Position2D : IComponent
 {
-    public float BeatsPerSecond;
+    public Vector2 Value;
 }
 
 [Game, Unique]
-public class UserRootNoteComponent : IComponent
+public class BeatsPerSecondComponent : IComponent
 {
-    public float Note;
+    public float Value;
+}
+
+[Game, Unique]
+public class RootPitchComponent : IComponent
+{
+    public float Value;
+}
+
+[Game, Unique]
+public class CurrentPitchComponent : IComponent
+{
+    public float Value;
 }
 
 [Game, Unique]
@@ -28,5 +40,11 @@ public class CellSizeComponent : IComponent
     public float Y;
 }
 
-//[Game, Unique]
-//public class 
+[Game]
+public class PitchMovementLerpSpeedComponent : IComponent
+{
+    public float Value;
+}
+
+[Game]
+public class PitchMovableComponent : IComponent { }

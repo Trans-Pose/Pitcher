@@ -10,22 +10,34 @@ public static class GameComponentsLookup {
 
     public const int BeatsPerSecond = 0;
     public const int CellSize = 1;
-    public const int GridSize = 2;
-    public const int UserRootNote = 3;
+    public const int CurrentPitch = 2;
+    public const int GridSize = 3;
+    public const int PitchMovable = 4;
+    public const int PitchMovementLerpSpeed = 5;
+    public const int Position2D = 6;
+    public const int RootPitch = 7;
 
-    public const int TotalComponents = 4;
+    public const int TotalComponents = 8;
 
     public static readonly string[] componentNames = {
         "BeatsPerSecond",
         "CellSize",
+        "CurrentPitch",
         "GridSize",
-        "UserRootNote"
+        "PitchMovable",
+        "PitchMovementLerpSpeed",
+        "Position2D",
+        "RootPitch"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(BeatsPerSecondComponent),
         typeof(CellSizeComponent),
+        typeof(CurrentPitchComponent),
         typeof(GridSizeComponent),
-        typeof(UserRootNoteComponent)
+        typeof(PitchMovableComponent),
+        typeof(PitchMovementLerpSpeedComponent),
+        typeof(Position2D),
+        typeof(RootPitchComponent)
     };
 }

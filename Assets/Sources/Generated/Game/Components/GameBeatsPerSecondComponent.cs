@@ -12,22 +12,22 @@ public partial class GameContext {
     public BeatsPerSecondComponent beatsPerSecond { get { return beatsPerSecondEntity.beatsPerSecond; } }
     public bool hasBeatsPerSecond { get { return beatsPerSecondEntity != null; } }
 
-    public GameEntity SetBeatsPerSecond(float newBeatsPerSecond) {
+    public GameEntity SetBeatsPerSecond(float newValue) {
         if (hasBeatsPerSecond) {
             throw new Entitas.EntitasException("Could not set BeatsPerSecond!\n" + this + " already has an entity with BeatsPerSecondComponent!",
                 "You should check if the context already has a beatsPerSecondEntity before setting it or use context.ReplaceBeatsPerSecond().");
         }
         var entity = CreateEntity();
-        entity.AddBeatsPerSecond(newBeatsPerSecond);
+        entity.AddBeatsPerSecond(newValue);
         return entity;
     }
 
-    public void ReplaceBeatsPerSecond(float newBeatsPerSecond) {
+    public void ReplaceBeatsPerSecond(float newValue) {
         var entity = beatsPerSecondEntity;
         if (entity == null) {
-            entity = SetBeatsPerSecond(newBeatsPerSecond);
+            entity = SetBeatsPerSecond(newValue);
         } else {
-            entity.ReplaceBeatsPerSecond(newBeatsPerSecond);
+            entity.ReplaceBeatsPerSecond(newValue);
         }
     }
 
@@ -49,17 +49,17 @@ public partial class GameEntity {
     public BeatsPerSecondComponent beatsPerSecond { get { return (BeatsPerSecondComponent)GetComponent(GameComponentsLookup.BeatsPerSecond); } }
     public bool hasBeatsPerSecond { get { return HasComponent(GameComponentsLookup.BeatsPerSecond); } }
 
-    public void AddBeatsPerSecond(float newBeatsPerSecond) {
+    public void AddBeatsPerSecond(float newValue) {
         var index = GameComponentsLookup.BeatsPerSecond;
         var component = (BeatsPerSecondComponent)CreateComponent(index, typeof(BeatsPerSecondComponent));
-        component.BeatsPerSecond = newBeatsPerSecond;
+        component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceBeatsPerSecond(float newBeatsPerSecond) {
+    public void ReplaceBeatsPerSecond(float newValue) {
         var index = GameComponentsLookup.BeatsPerSecond;
         var component = (BeatsPerSecondComponent)CreateComponent(index, typeof(BeatsPerSecondComponent));
-        component.BeatsPerSecond = newBeatsPerSecond;
+        component.Value = newValue;
         ReplaceComponent(index, component);
     }
 
