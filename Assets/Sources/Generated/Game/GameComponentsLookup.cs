@@ -8,18 +8,21 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int BeatsPerSecond = 0;
-    public const int CellSize = 1;
-    public const int CurrentPitch = 2;
-    public const int GridSize = 3;
-    public const int PitchMovable = 4;
-    public const int PitchMovementLerpSpeed = 5;
-    public const int Position2D = 6;
-    public const int RootPitch = 7;
+    public const int BeatMovable = 0;
+    public const int BeatsPerSecond = 1;
+    public const int CellSize = 2;
+    public const int CurrentPitch = 3;
+    public const int GridSize = 4;
+    public const int PitchMovable = 5;
+    public const int PitchMovementLerpSpeed = 6;
+    public const int Position2D = 7;
+    public const int RootPitch = 8;
+    public const int View = 9;
 
-    public const int TotalComponents = 8;
+    public const int TotalComponents = 10;
 
     public static readonly string[] componentNames = {
+        "BeatMovable",
         "BeatsPerSecond",
         "CellSize",
         "CurrentPitch",
@@ -27,10 +30,12 @@ public static class GameComponentsLookup {
         "PitchMovable",
         "PitchMovementLerpSpeed",
         "Position2D",
-        "RootPitch"
+        "RootPitch",
+        "View"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(BeatMovableComponent),
         typeof(BeatsPerSecondComponent),
         typeof(CellSizeComponent),
         typeof(CurrentPitchComponent),
@@ -38,6 +43,7 @@ public static class GameComponentsLookup {
         typeof(PitchMovableComponent),
         typeof(PitchMovementLerpSpeedComponent),
         typeof(Position2D),
-        typeof(RootPitchComponent)
+        typeof(RootPitchComponent),
+        typeof(ViewComponent)
     };
 }

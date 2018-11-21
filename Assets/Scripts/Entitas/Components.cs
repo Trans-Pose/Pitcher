@@ -41,6 +41,12 @@ public class CellSizeComponent : IComponent
 }
 
 [Game]
+public class ViewComponent : IComponent
+{
+    public GameObject GameObject;
+}
+
+[Game]
 public class PitchMovementLerpSpeedComponent : IComponent
 {
     public float Value;
@@ -48,3 +54,6 @@ public class PitchMovementLerpSpeedComponent : IComponent
 
 [Game]
 public class PitchMovableComponent : IComponent { }
+
+[Game]
+public class BeatMovableComponent : IComponent { }
