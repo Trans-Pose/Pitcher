@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace EnumerableDropOutStack
+﻿
+namespace System.Collections.Generic
 {
     /// <summary>
     /// An Enumerable Drop Out Stack Class.

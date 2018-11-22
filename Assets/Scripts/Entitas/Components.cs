@@ -40,6 +40,9 @@ public class CellSizeComponent : IComponent
     public float Y;
 }
 
+[Game, Unique, FlagPrefix("should")]
+public class DetectPitchComponent : IComponent { }
+
 [Game]
 public class ViewComponent : IComponent
 {

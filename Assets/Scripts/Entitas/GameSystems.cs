@@ -8,9 +8,11 @@ public class GameSystems : Feature
         SetupUniqueComponents(game, levelConfig, userConfig);
         CreatePlayhead(game, gameConfig, levelConfig);
         CreatePlayers(game, gameConfig, levelConfig);
+        Add(new PitchDetectionSystem(contexts));
         Add(new PitchMovementSystem(contexts));
         Add(new BeatMovementSystem(contexts));
         Add(new LinkPositionSystem(contexts));
+        game.shouldDetectPitch = true;
     }
 
     private void SetupUniqueComponents(GameContext game, LevelConfig levelConfig, UserConfig userConfig)
