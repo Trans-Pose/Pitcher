@@ -9,18 +9,18 @@ public class PitchPlayer : MonoBehaviour
     private UserConfig _user;
     private float _top, _bottom;
 
-	private void Awake()
-	{
-        var halfHeight = _level.Grid.cellSize.y * _level.Rows * 0.5f;
-        _top = _level.Grid.transform.position.y + halfHeight;
-        _bottom = _level.Grid.transform.position.y - halfHeight;
+    private void Awake()
+    {
+        var halfHeight = _level.CellSize.y * _level.Rows * 0.5f;
+        _top = halfHeight;
+        _bottom = -_top;
     }
 
     private void Update()
     {
         var pitch = _pitchDetector.DetectedPitches.Peek();
-        var clampedPitch = Mathf.Clamp(pitch, _user.Root, _user.Octave);
-        var normalizedPitch = ErisMath.Normalize(clampedPitch, _user.Root, _user.Octave);
+        var clampedPitch = Mathf.Clamp(pitch, _user.Root, _user.Root * 2);
+        var normalizedPitch = ErisMath.Normalize(clampedPitch, _user.Root, _user.Root * 2);
         var height = Mathf.Lerp(_bottom, _top, normalizedPitch);
         var pos = transform.position;
         pos.y = height;
