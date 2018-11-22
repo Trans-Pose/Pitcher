@@ -69,11 +69,12 @@ public class PitchDetectionSystem : IExecuteSystem, IInitializeSystem, ITearDown
         if (_isRecording)
         {
             var pitch = AverageOfNonZeroPitches();
-
-            Debug.Log("Pitch is " + pitch + " time " + Time.time);
-            _detectedPitches.Push(pitch);
-            _pitchesThisUpdate.Clear();
-            _gameContext.ReplaceCurrentPitch(pitch);
+            if (IsValidPitch(pitch))
+            {
+                _detectedPitches.Push(pitch);
+                _gameContext.ReplaceCurrentPitch(pitch);
+            }
+           _pitchesThisUpdate.Clear();
         }
     }
 
@@ -98,17 +99,22 @@ public class PitchDetectionSystem : IExecuteSystem, IInitializeSystem, ITearDown
         int validPitches = 0;
         for (int i = 0; i < _pitchesThisUpdate.Count; i++)
         {
-            if (_pitchesThisUpdate[i] > 1)
+            if (IsValidPitch(_pitchesThisUpdate[i]))
             {
                 sum += _pitchesThisUpdate[i];
                 validPitches++;
             }
         }
-        if (validPitches > 0 && validPitches >= _pitchesThisUpdate.Count * 1f / 3f)
+        if (validPitches > 0)
         {
             return sum / validPitches;
         }
         return 0;
+    }
+
+    private bool IsValidPitch(float pitch)
+    {
+        return pitch > 1;
     }
 
     private bool HandleRecordingData(int Handle, IntPtr Buffer, int Length, IntPtr User)

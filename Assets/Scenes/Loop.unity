@@ -221,7 +221,7 @@ MonoBehaviour:
   _levelConfigs:
   - {fileID: 11400000, guid: b2f8a280bd7d38f41b43f1cc4a1e7bc4, type: 2}
   _userConfig:
-    Root: 261.62558
+    Root: 130.8128
 --- !u!4 &1728302072
 Transform:
   m_ObjectHideFlags: 0
