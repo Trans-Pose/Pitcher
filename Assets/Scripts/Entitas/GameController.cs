@@ -12,20 +12,25 @@ public class GameController : MonoBehaviour
 
     private void Awake()
 	{
-
         _systems = AddSystems();
+        _systems.Initialize();
     }
 
     private Systems AddSystems()
     {
         var contexts = Contexts.sharedInstance;
         return new Feature("Systems")
-            .Add(new GameSystems(contexts));   
+            .Add(new GameSystems(contexts, _gameConfig, _levelConfigs[0], _userConfig));   
     }
 
     private void Update()
     {
         _systems.Execute();
         _systems.Cleanup();
+    }
+
+    private void OnDestroy()
+    {
+        _systems.TearDown();
     }
 }
