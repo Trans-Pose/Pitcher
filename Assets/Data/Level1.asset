@@ -14,4 +14,4 @@ MonoBehaviour:
   _bpm: 120
   _rows: 12
   _columns: 8
-  _cellSize: {x: 1, y: 1}
+  _cellSize: {x: 1, y: 0.5}
